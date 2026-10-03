@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="MergeSight gives data leaders one standing view of what AI shipped, whether it was reviewed and tested, and how it correlates with data incidents.">
+  <title>MergeSight — AI change assurance for data teams</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230F766E'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <p class="badge">Launching Q4 2026</p>  <!-- S0-01 -->
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- S1 Hero — render order S1-01 → S1-02 → S1-05 → S1-04 → S1-06 -->
+    <section class="section hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1 class="hero-title">Every AI change in your data stack, on the record.</h1>  <!-- S1-01 -->
+          <p class="hero-lede">AI-generated changes are merging into production pipelines faster than anyone can review them. MergeSight gives data leaders one standing view of what AI shipped, whether it was reviewed and tested, and how it correlates with data incidents.</p>  <!-- S1-02 -->
+          <div class="definition-card">
+            <p>MergeSight joins four things your data stack already produces — <strong>GitHub pull-request metadata</strong>, <strong>AI-authorship signals</strong>, <strong>dbt artifacts (<code>manifest.json</code>, <code>run_results.json</code>)</strong>, and your <strong>data-incident feed</strong> — into one read-only view. That's AI change assurance.</p>  <!-- S1-05 verbatim; strong/code = typographic emphasis only -->
+          </div>
+          <p class="cta-row"><a class="cta" href="#signup">Request your free report</a></p>  <!-- S1-04 -->
+          <p class="trust-line">Free single-repo monthly report · Read-only · Metadata only · No new workflow for your engineers</p>  <!-- S1-06, mid-dots verbatim -->
+        </div>
+        <div class="artifact">
+  <div class="artifact-head">
+    <p class="artifact-title">AI change assurance report</p>
+    <p class="artifact-period mono">Sep 2026</p>
+    <p class="artifact-repo mono">github.com/harborview-grocery/warehouse</p>
+  </div>
+  <div class="kpi-row">
+    <p class="kpi"><span class="kpi-label">AI-authored changes</span> <span class="kpi-value num">47</span></p>
+    <p class="kpi"><span class="kpi-label">Human-authored changes</span> <span class="kpi-value num">81</span></p>
+    <p class="kpi"><span class="kpi-label">AI review coverage</span> <span class="kpi-value num">76.6%</span></p>
+    <p class="kpi"><span class="kpi-label">Human review coverage</span> <span class="kpi-value num">95.1%</span></p>
+  </div>
+  <div class="bars" aria-hidden="true"><!-- decorative reinforcement; KPI row already carries the numbers for AT -->
+    <div class="bar"><span class="bar-fill bar-ai" style="width:76.6%"></span><span class="bar-label mono">76.6%</span></div>
+    <div class="bar"><span class="bar-fill bar-human" style="width:95.1%"></span><span class="bar-label mono">95.1%</span></div>
+  </div>
+  <div class="artifact-tablefade"><!-- visual-QA P1 (r1): pins the narrow-width right-edge fade above the scroller (styled scrollbars don't paint in headless captures; wrapper exists only to scope top/bottom to the wrap) -->
+  <div class="artifact-tablewrap"><!-- scoped horizontal scroll on narrow screens; page itself never scrolls sideways -->
+    <table class="artifact-table">
+      <thead>
+        <tr><th scope="col">PR</th><th scope="col">Author</th><th scope="col">Attribution</th><th scope="col">Review</th><th scope="col">dbt models</th><th scope="col">Tests</th><th scope="col">Incidents</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">#482</td><td class="mono">d.okafor</td><td><span class="chip chip-direct">Direct</span></td><td class="review-ok">Reviewed</td><td class="num">3</td><td>14 passing</td><td class="mono">—</td></tr>
+        <tr><td class="mono">#479</td><td class="mono">ai-assistant[bot]</td><td><span class="chip chip-direct">Direct</span></td><td class="review-ok">Reviewed</td><td class="num">2</td><td>9 passing</td><td class="mono">—</td></tr>
+        <tr><td class="mono">#476</td><td class="mono">r.chen</td><td>Inferred <span class="chip chip-inferred">attribution unverified</span></td><td class="review-none">None</td><td class="num">1</td><td>2 thin</td><td class="mono">INC-0417</td></tr>
+        <tr><td class="mono">#471</td><td class="mono">ai-assistant[bot]</td><td>Inferred <span class="chip chip-inferred">attribution unverified</span></td><td class="review-ok">Reviewed</td><td class="num">4</td><td>21 passing</td><td class="mono">—</td></tr>
+        <tr><td class="mono">#468</td><td class="mono">m.silva</td><td><span class="chip chip-direct">Direct</span></td><td class="review-none">None</td><td class="num">2</td><td>5 passing</td><td class="mono">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div class="artifact-foot">
+    <span class="span-btn">Share report</span>
+    <span class="span-btn">Download PDF</span>
+    <span class="artifact-period-note mono">Period: Sep 2026</span>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <!-- S2 Problem (white surface band) -->
+    <section class="section section-alt problem">
+      <div class="container">
+        <h2 class="section-title">AI code is merging with thin review — and nobody is counting</h2>  <!-- S2-01 -->
+        <p class="prose stat-para">The numbers are public and blunt. <span class="src">Sonar</span>'s 2026 State of Code finds <span class="num">42%</span> of committed code is now AI-generated — and <span class="num">96%</span> of developers don't fully trust it. <span class="src">Faros</span> telemetry across thousands of teams shows a <span class="num">31.3%</span> rise in pull requests merging with zero review. And <span class="src">LinearB</span>'s benchmark of <span class="num">8.1 million</span> pull requests found AI-authored changes accepted at <span class="num">32.7%</span> versus <span class="num">84.4%</span> for human-authored ones — after waiting <span class="num">4.6×</span> longer for a reviewer to pick them up.</p>  <!-- S2-02 verbatim, ONE paragraph — never decomposed into stat cards (C4 guard) -->
+        <p class="prose">Most review processes were designed for human-written code — pull request by pull request, reviewer by reviewer. AI-authored volume broke that math: more changes, thinner review, and no way to see, across a quarter, how AI-authored changes differ from the rest of your merge history.</p>  <!-- S2-03 -->
+        <p class="prose">So when an incident hits, the engineering leader's real question — "which AI-authored changes shipped, and were they reviewed?" — gets answered by hand: ninety days of merge data pulled into a spreadsheet, after the fact, if it gets answered at all. That is the job MergeSight takes over.</p>  <!-- S2-04 -->
+      </div>
+    </section>
+
+    <!-- S3 How it works (canvas band) -->
+    <section class="section how">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>  <!-- S3-01 -->
+        <ol class="steps">
+          <li>Connect read-only. MergeSight joins the metadata your data stack already produces — GitHub pull-request metadata, dbt artifacts (<code>manifest.json</code> and <code>run_results.json</code>), and your data-incident feed. No warehouse access. Nothing written.</li>  <!-- S3-02 -->
+          <li>Attribute and join. Every change is classified AI-authored or human-authored from commit signals, then joined to review coverage, dbt test and documentation coverage, and the incidents that followed.</li>  <!-- S3-03 -->
+          <li>Read the report. A monthly AI change assurance report for your team — shareable — plus a standing dashboard and coverage alerts in between.</li>  <!-- S3-04 -->
+        </ol>
+      </div>
+    </section>
+
+    <!-- S4 Benefits (white surface band, 6 blocks) -->
+    <section class="section section-alt benefits">
+      <div class="container">
+        <h2 class="section-title">What you finally get to see</h2>  <!-- S4-01 -->
+        <ul class="benefit-grid">
+          <li class="benefit">
+            <h3>The AI footprint on your pipeline</h3>  <!-- S4-02 -->
+            <p>Every AI-authored change that shipped — which pull requests, which dbt models, who merged them — in one report instead of a week of merge-log archaeology.</p>  <!-- S4-03 -->
+          </li>
+          <li class="benefit">
+            <h3>Review coverage, split by authorship</h3>  <!-- S4-04 -->
+            <p>Merges with no review, AI-authored versus human — the split generic delivery dashboards never give you, because they don't know what AI wrote.</p>  <!-- S4-05 -->
+          </li>
+          <li class="benefit">
+            <h3>Test and documentation coverage on AI-touched models</h3>  <!-- S4-06 -->
+            <p>When an AI-authored pull request touches a dbt model with thin tests or missing documentation, you see it — before it becomes the incident you're explaining upward.</p>  <!-- S4-07 -->
+          </li>
+          <li class="benefit">
+            <h3>AI changes next to the incidents that followed</h3>  <!-- S4-08 -->
+            <p>When a pipeline breaks, see the AI-authored changes that preceded it — correlation you can actually investigate, assembled for you instead of reconstructed from memory.</p>  <!-- S4-09 -->
+          </li>
+          <li class="benefit">
+            <h3>Attribution you can trust because it's honest</h3>  <!-- S4-10 -->
+            <p>AI authorship is detected from commit signals — and labeled "attribution unverified" wherever it is inferred rather than direct. Decision support, not forensics.</p>  <!-- S4-11, uniform treatment — no badge/warning chrome -->
+          </li>
+          <li class="benefit">
+            <h3>Read-only and metadata-only</h3>  <!-- S4-12 -->
+            <p>No warehouse access, nothing written, no new workflow for your engineers. The assurance view lives at the manager's desk while the team keeps shipping.</p>  <!-- S4-13 -->
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- S5 Pricing (canvas band — skimmable flow position, never scroll-buried, no toggle) -->
+    <section class="section pricing">
+      <div class="container">
+        <h2 class="section-title">Pricing</h2>  <!-- S5-01 -->
+        <p class="prose pricing-intro">Start free with one repository. Scale when the questions get bigger.</p>  <!-- S5-02 -->
+        <ul class="tier-grid">
+          <li class="tier">
+            <h3 class="tier-name">Free — <span class="price">$0</span></h3>  <!-- S5-03 verbatim; price span mono -->
+            <p class="tier-desc">One repository. One AI change assurance report every month. The whole report, not a teaser.</p>  <!-- S5-04 -->
+          </li>
+          <li class="tier">
+            <h3 class="tier-name">Starter — <span class="price">$150/mo</span>, billed annually</h3>  <!-- S5-05 -->
+            <p class="tier-desc">For small dbt-first data teams putting AI to work: the standing dashboard, coverage alerts, and the monthly report across your repositories.</p>  <!-- S5-06 -->
+          </li>
+          <li class="tier tier-accent">
+            <h3 class="tier-name">Team — <span class="price">$300/mo</span>, billed annually</h3>  <!-- S5-07 -->
+            <p class="tier-desc">For growing data teams where AI-assisted development is the default. Everything in Starter, sized for a bigger team.</p>  <!-- S5-08 -->
+          </li>
+          <li class="tier">
+            <h3 class="tier-name">Scale — <span class="price">$500/mo</span>, billed annually</h3>  <!-- S5-09 -->
+            <p class="tier-desc">For larger data organizations joining AI attribution to incidents across the whole stack.</p>  <!-- S5-10 -->
+          </li>
+        </ul>
+        <p class="billing-note">Every plan is priced per data team, billed annually. The free single-repo report stays free.</p>  <!-- S5-11 -->
+      </div>
+    </section>
+
+    <!-- S6 FAQ (white surface band, 6 Q&As all visible, no accordion) -->
+    <section class="section section-alt faq">
+      <div class="container">
+        <h2 class="section-title">Questions engineering leaders actually ask</h2>  <!-- S6-01 -->
+        <div class="faq-list prose">
+          <div class="faq-item">
+            <h3>What exactly is in the free monthly report?</h3>  <!-- S6-02 -->
+            <p>A complete AI change assurance report for one repository: every AI-authored and human-authored change that shipped, review coverage including merges with no review, test and documentation coverage on the dbt models those changes touched, the data incidents correlated with preceding changes, and attribution labels on every row. It's shareable — built to be forwarded to your VP or into your board deck, not buried in a dashboard.</p>  <!-- S6-03 -->
+          </div>
+          <div class="faq-item">
+            <h3>What does "attribution unverified" mean?</h3>  <!-- S6-04 -->
+            <p>AI authorship is detected from commit signals — co-authored-by trailers, tool telemetry where tools expose it. Detection is not proof: some AI code carries no marker, and markers can be edited. So wherever attribution is inferred rather than direct, every row is labeled "attribution unverified." That honesty is the point. Auditors and boards don't expect line-level certainty — they expect a factual, artifact-level record of what shipped and how it was reviewed.</p>  <!-- S6-05 -->
+          </div>
+          <div class="faq-item">
+            <h3>Who is this for?</h3>  <!-- S6-06 -->
+            <p>Data engineering managers, Heads of Data, and analytics engineering leads running dbt-first teams with AI-assisted code in the workflow — the people who own review policy and get asked the hard questions after an incident, at the quarterly review, or when the AI policy rolls out.</p>  <!-- S6-07 -->
+          </div>
+          <div class="faq-item">
+            <h3>What is MergeSight not?</h3>  <!-- S6-08 -->
+            <p>Not an audit. Not compliance certification. Not a legal attestation. MergeSight is decision support for engineering leadership — a factual, standing record of AI-authored change activity. It's also not an AI code reviewer (it doesn't comment on your pull requests) and not a data-observability platform (it doesn't watch your warehouse at runtime). It's the standing join between those worlds, at the manager's desk.</p>  <!-- S6-09 — AC-1 verbatim; styled identically to other answers, no warning chrome -->
+          </div>
+          <div class="faq-item">
+            <h3>How is this different from engineering-intelligence dashboards and AI code reviewers?</h3>  <!-- S6-10 -->
+            <p>Engineering-intelligence platforms are built and priced per developer seat for large engineering organizations — they measure delivery, not data. AI code reviewers work one pull request at a time. Data-observability tools watch incidents at runtime. None of them joins AI attribution, review coverage, dbt artifacts, and data-incident feeds into one standing view for a data team. That join is the product.</p>  <!-- S6-11 — single on-page market claim, keep verbatim/bounded -->
+          </div>
+          <div class="faq-item">
+            <h3>What does MergeSight connect to?</h3>  <!-- S6-12 -->
+            <p>Read-only connections to the metadata your stack already produces: GitHub pull-request metadata and commit signals, dbt artifacts (<code>manifest.json</code> and <code>run_results.json</code>), and your data-incident feed. No warehouse access, no writes, nothing installed on your infrastructure.</p>  <!-- S6-13 verbatim, file names in code -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S7 Signup band — PRIMARY VISUAL FOCAL POINT; only saturated field (teal-800) -->
+    <section id="signup" class="section band" tabindex="-1">
+      <div class="container band-inner">
+        <h2 class="band-title">Get your free single-repo report</h2>  <!-- S7-01 — largest section heading on the page -->
+        <p class="band-support">Launching Q4 2026 — leave your details for more info when we launch, and we'll follow up with everything you need to connect your first repository.</p>  <!-- S7-02 -->
+        <form data-signup>
+          <div class="form-row">
+            <div class="field">
+              <label for="signup-email">Work email</label>  <!-- S7-03, visible label -->
+              <input type="email" id="signup-email" name="email" placeholder="you@company.com" autocomplete="email">  <!-- S7-04 placeholder -->
+            </div>
+            <div class="field">
+              <label for="signup-repo">Your dbt repository (optional)</label>  <!-- S7-05 -->
+              <input type="text" id="signup-repo" name="repo" placeholder="github.com/your-org/your-dbt-project">  <!-- S7-06; NOT required -->
+            </div>
+          </div>
+          <p class="field-note">Optional — just the location, so your first report is scoped to a real repo. Read-only access comes later.</p>  <!-- S7-07 -->
+          <button type="button">Request my free report</button>  <!-- S7-08; type="button" per static-page contract (dispatch "S8 type=button" = this control) -->
+          <p class="signup-status" role="status"></p>  <!-- REQUIRED: present + empty from page load; S7-10 (success) / S7-11 (error) live here in deployed variants only -->
+        </form>
+        <p class="consent">When you submit, we store your email, this page's address and technical metadata (time, IP, browser) to send you launch information and your report setup details — nothing else, and we never share it.</p>  <!-- S7-09 verbatim, sibling after form -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© MergeSight — AI change assurance for data teams.</p>  <!-- S8-01 -->
+      <p>Launching Q4 2026.</p>  <!-- S8-02 -->
+    </div>
+  </footer>
+
+  <script src="signup-config.js"></script>  <!-- comment-only stub; keeps window.__SHADOW_SIGNUP_CONFIG__ undefined locally -->
+  <script src="signup.js"></script>         <!-- dormant; bound to <form data-signup>, no-ops while config undefined -->
+</body>
+</html>

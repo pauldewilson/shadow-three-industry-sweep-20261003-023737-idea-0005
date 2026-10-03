@@ -1,0 +1,293 @@
+:root {
+  /* palette — 13 tokens, art-direction §2.1 verbatim */
+  --canvas:         #F8FAFC;  /* page background */
+  --surface:        #FFFFFF;  /* cards, definition card, inputs, mockup panel */
+  --surface-sunken: #F1F5F9;  /* table striping, code chips, bar tracks */
+  --border:         #E2E8F0;  /* decorative hairlines ONLY — never sole marker of an interactive component */
+  --border-ui:      #64748B;  /* borders of interactive components (≥3:1 non-text) */
+  --text:           #0F172A;  /* headings, primary body, table emphasis */
+  --text-2:         #475569;  /* secondary body */
+  --text-3:         #64748B;  /* muted micro-copy — white/canvas/accent-soft backgrounds only */
+  --accent:         #0F766E;  /* THE accent: CTA fill, links, data emphasis, chips, bar fill */
+  --accent-strong:  #115E59;  /* band background, hover, max-contrast accent text */
+  --accent-soft:    #F0FDFA;  /* chip washes, badge bg, band secondary text */
+  --accent-ink:     #134E4A;  /* text on accent-soft */
+  --on-accent:      #FFFFFF;  /* text/fills on accent and accent-strong */
+
+  /* type — system/local stacks only, no @font-face, no @import (MD-7) */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace;
+
+  /* shape + the page's only shadow (alpha derivation of --text) */
+  --radius-card: 12px;
+  --radius-control: 8px;
+  --shadow-soft: 0 1px 2px rgba(15, 23, 42, 0.06);
+
+  --w-container: 1080px;
+  --pad-x: 24px;
+  color-scheme: light;
+}
+
+/* ============================================================
+   MergeSight — coming-soon page · styles.css
+   Implements art-direction §2–§8 exactly. Tokens above are the
+   contract. No JS behavior, no imports, no external requests,
+   no animation by default. Breakpoints: 640 / 900 / 1024 / 1200.
+   ============================================================ */
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;            /* 16px mobile */
+  line-height: 1.65;          /* unitless — survives text-spacing overrides */
+  font-weight: 400;
+}
+h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; margin: 0 0 16px; }
+h1 { font-weight: 700; }
+p { margin: 0 0 16px; }
+ul, ol { margin: 0; padding: 0; }
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;          /* mono never shouts */
+  font-variant-numeric: tabular-nums;
+}
+.num { font-family: var(--font-mono); font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.src { font-weight: 600; color: var(--text); }
+.container { max-width: var(--w-container); margin-inline: auto; padding-inline: var(--pad-x); }
+.prose { max-width: 66ch; }   /* ≈70ch at 17px; inside the designer's 720px cap */
+
+/* ---------- focus + skip link ---------- */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.band :focus-visible { outline-color: var(--on-accent); }   /* white ring on teal */
+[tabindex="-1"]:focus { outline: none; }  /* programmatic targets (#main, #signup) are not interactive; every interactive element keeps its ring */
+.skip-link {
+  position: absolute; left: 16px; top: -60px; z-index: 10;
+  background: var(--surface); color: var(--accent-strong);
+  font-weight: 600; text-decoration: underline;
+  padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center;
+  border: 1px solid var(--border-ui); border-radius: var(--radius-control);
+}
+.skip-link:focus { top: 16px; }
+
+/* ---------- header + badge ---------- */
+.site-header { padding: 24px 0 0; }
+.badge {
+  display: inline-block; margin: 0;
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-ink); background: var(--accent-soft);
+  border: 1px solid rgba(15, 118, 110, 0.2);  /* alpha derivation of --accent; decorative */
+  border-radius: 999px; padding: 8px 14px;
+}
+
+/* ---------- sections ---------- */
+.section { padding: 64px 0; }
+.section-alt { background: var(--surface); border-top: 1px solid var(--border); }  /* hairline divider per layout map §2.6 ("hairline --border dividers between sections"); color change supplies the bottom boundary */
+.section-title { font-size: clamp(1.6rem, 1.2vw + 1.1rem, 1.9rem); margin-bottom: 24px; }
+
+/* ---------- S1 hero ---------- */
+.hero { padding: 24px 0 96px; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+.hero-title { font-size: clamp(2.1rem, 4.5vw + 1rem, 2.9rem); line-height: 1.15; margin: 20px 0 20px; }
+.hero-lede { color: var(--text-2); max-width: 66ch; margin-bottom: 24px; }
+.definition-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-card);
+  padding: 20px; margin: 0 0 24px;
+}
+.definition-card p { margin: 0; color: var(--text-2); }
+.definition-card strong { color: var(--text); font-weight: 600; }
+.cta-row { margin: 0 0 12px; }
+.cta {
+  display: inline-block; min-height: 48px;
+  background: var(--accent); color: var(--on-accent);
+  font-weight: 600; font-size: 1rem; text-decoration: none;
+  border-radius: var(--radius-control); padding: 13px 28px;
+}
+.cta:hover { background: var(--accent-strong); }   /* cosmetic only — no meaning carried by hover */
+.trust-line { color: var(--text-3); font-size: 0.875rem; margin: 0; }
+
+/* ---------- S2 problem ---------- */
+.stat-para { color: var(--text-2); }
+.stat-para .num, .stat-para .src { color: var(--text); }
+
+/* ---------- S3 how it works ---------- */
+.steps { list-style: none; counter-reset: step; display: grid; gap: 24px; }
+.steps li { counter-increment: step; color: var(--text-2); padding-left: 40px; position: relative; }
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 0;
+  font-family: var(--font-mono); font-weight: 600; font-size: 1.25rem;
+  color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.steps code { color: var(--text); }
+
+/* ---------- S4 benefits ---------- */
+.benefit-grid { list-style: none; display: grid; gap: 32px; }
+.benefit { position: relative; padding-left: 20px; }
+.benefit::before { content: ""; position: absolute; left: 0; top: 0.4em; width: 8px; height: 8px; background: var(--accent); }
+.benefit h3 { font-size: 1.0625rem; margin-bottom: 8px; }
+.benefit p { margin: 0; color: var(--text-2); font-size: 1rem; }
+
+/* ---------- S5 pricing ---------- */
+.pricing-intro { color: var(--text-2); margin-bottom: 32px; }
+.tier-grid { list-style: none; display: grid; gap: 24px; margin-bottom: 24px; }
+.tier {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 20px; box-shadow: var(--shadow-soft);
+}
+.tier-accent { border-top: 2px solid var(--accent); }   /* emphasis without invented badges */
+.tier-name { font-size: 1.0625rem; margin-bottom: 8px; }
+.price { font-family: var(--font-mono); font-weight: 600; font-size: 1.125rem; font-variant-numeric: tabular-nums; color: var(--text); }
+.tier-desc { margin: 0; color: var(--text-2); font-size: 0.9375rem; }
+.billing-note { margin: 0; color: var(--text-3); font-size: 0.875rem; }
+
+/* ---------- S6 FAQ ---------- */
+.faq-list { display: grid; gap: 32px; }
+.faq-item h3 { font-size: 1.1em; margin-bottom: 8px; }
+.faq-item p { margin: 0; color: var(--text-2); }
+
+/* ---------- S7 signup band — PRIMARY VISUAL FOCAL POINT ---------- */
+.band { background: var(--accent-strong); color: var(--on-accent); padding: 72px 0; }
+.band-inner { max-width: 640px; margin-inline: auto; }  /* centered 640px column per layout map §2.6 / §4.1 */
+.band-title { font-size: clamp(2rem, 3.2vw + 0.9rem, 2.5rem); font-weight: 700; color: var(--on-accent); text-align: center; margin-bottom: 12px; }
+.band-support { color: var(--accent-soft); text-align: center; margin-bottom: 32px; }
+.form-row { display: grid; gap: 16px; }
+.field label { display: block; font-weight: 600; font-size: 0.9375rem; margin-bottom: 8px; color: var(--on-accent); }
+.band input {
+  width: 100%; min-height: 48px;
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border);          /* decorative hairline; the real boundary is white vs band (7.6:1) */
+  border-radius: var(--radius-control); padding: 12px 16px; font: inherit;
+}
+.band input::placeholder { color: var(--text-3); opacity: 1; }
+.field-note { font-size: 0.875rem; color: var(--accent-soft); margin: 12px 0 24px; }
+.band button {
+  display: block; width: 100%; min-height: 48px;
+  background: var(--on-accent); color: var(--accent-strong);
+  font-weight: 700; font-size: 1rem; font-family: inherit;
+  border: 0; border-radius: var(--radius-control); padding: 12px 24px; cursor: pointer;
+}
+.band button:hover { background: var(--accent-soft); }
+.signup-status { margin: 0; font-size: 0.9375rem; font-weight: 600; color: var(--accent-soft); }
+.signup-status:not(:empty) { margin-top: 12px; }  /* zero-footprint when empty; spacing only when signup.js fills it (live variants) */
+.consent { font-size: 0.875rem; color: var(--accent-soft); max-width: 56ch; margin: 20px 0 0; }
+
+/* ---------- S8 footer ---------- */
+.site-footer { border-top: 1px solid var(--border); padding: 32px 0 48px; }
+.site-footer p { margin: 0 0 4px; color: var(--text-3); font-size: 0.875rem; }
+
+/* ---------- mockup artifact ---------- */
+.artifact {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-card); box-shadow: var(--shadow-soft);
+  padding: 20px; max-width: 520px;
+  min-width: 0;  /* grid-item guard: lets the hero track keep its share so the mockup table's scoped scroll works as designed */
+}
+.artifact-head { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 4px; }
+.artifact-title { margin: 0; font-weight: 600; font-size: 0.9375rem; color: var(--text); }
+.artifact-period, .artifact-period-note { margin: 0; font-size: 0.75rem; color: var(--text-3); }
+.artifact-repo { margin: 0; font-size: 0.8125rem; color: var(--text-2); overflow-wrap: anywhere; width: 100%; }
+.kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 16px; margin: 16px 0; }
+.kpi { margin: 0; }
+.kpi-label { display: block; font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-3); }
+.kpi-value { font-family: var(--font-mono); font-weight: 600; font-size: 1.25rem; color: var(--text); font-variant-numeric: tabular-nums; }
+.bars { display: grid; gap: 8px; margin: 0 0 16px; }
+.bar { position: relative; height: 8px; background: var(--surface-sunken); border-radius: 4px; margin-right: 56px; }
+.bar-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 4px; }
+.bar-ai { background: var(--accent); }
+.bar-human { background: var(--text-3); }
+.bar-label { position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); font-size: 0.75rem; color: var(--text-2); }
+.artifact-tablewrap {
+  overflow-x: auto; margin: 0 -4px; padding: 0 4px;  /* scoped scroll only — the page never scrolls sideways */
+  /* visual-QA P1 (2026-10-03 r1): visible affordance so a clipped edge reads as scrollable, not broken.
+     Appears only when the table actually overflows; thumb/track = existing token pair (--border-ui on
+     --surface-sunken, 4.34:1 ≥ 3:1 non-text). No new color. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-ui) transparent;
+}
+.artifact-tablewrap::-webkit-scrollbar { height: 8px; }
+.artifact-tablewrap::-webkit-scrollbar-track { background: var(--surface-sunken); border-radius: 4px; }
+.artifact-tablewrap::-webkit-scrollbar-thumb { background: var(--border-ui); border-radius: 4px; }
+/* visual-QA P1 (2026-10-03 r1): right-edge fade for the narrow-width scroll zone. The compressed
+   table's 460px min-width floor makes overflow deterministic: the wrap scrolls iff the viewport is
+   < ~550px, so the fade is scoped to exactly that range — it never suggests scroll where the table
+   already fits (≥550px). Paints above the cut edge in every engine incl. headless captures, where
+   styled scrollbars don't render. White = the mockup panel's own --surface; nothing new. */
+.artifact-tablefade { position: relative; }
+@media (max-width: 549.98px) {
+  .artifact-tablefade::after {
+    content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 22px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), var(--surface) 88%);
+    pointer-events: none;
+  }
+}
+/* visual-QA P1 (2026-10-03 r1): table compressed (cells 11px, headers 10px, 4px cell padding, smaller
+   chips) so all 7 columns fit the panel's inner width at desktop — measured min-content ≈446px at
+   worst-case system fonts. min-width floor kept for the narrow-width scoped scroll. */
+.artifact-table { width: 100%; min-width: 460px; border-collapse: collapse; font-size: 0.6875rem; }
+.artifact-table th {
+  text-align: left; font-size: 0.625rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.02em; color: var(--text-3); padding: 7px 4px; border-bottom: 1px solid var(--border);
+}
+.artifact-table td { padding: 7px 4px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-2); }
+.artifact-table tbody tr:nth-child(even) { background: var(--surface-sunken); }
+.artifact-table .num, .artifact-table .mono { color: var(--text); }
+.chip { display: inline-block; font-size: 0.625rem; font-weight: 600; padding: 2px 4px; border-radius: 4px; }  /* visual-QA P1: compressed with the table */
+.chip-direct { background: var(--accent-soft); color: var(--accent); }
+.chip-inferred { background: var(--surface-sunken); color: var(--text-2); border: 1px dashed var(--border); font-weight: 400; }
+.artifact-table .review-ok { color: var(--accent); font-weight: 500; }      /* 5.5 on white / 5.0 on sunken — AA in both rows; scoped to out-rank `.artifact-table td` */
+.artifact-table .review-none { color: var(--text); font-weight: 600; }      /* found by weight, not a second hue; scoped to out-rank `.artifact-table td` */
+.artifact-foot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+.span-btn {  /* INERT — styled span, never a button/link/tabindex (static-page contract) */
+  display: inline-block; font-size: 0.8125rem; font-weight: 600;
+  color: var(--text-2); background: var(--surface-sunken);
+  border: 1px solid var(--border); border-radius: var(--radius-control); padding: 8px 14px;
+}
+.artifact-foot .artifact-period-note { margin-left: auto; }
+
+/* ---------- breakpoints (mobile-first) ---------- */
+@media (min-width: 640px) {
+  .benefit-grid { grid-template-columns: repeat(2, 1fr); }
+  .tier-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr 1.4fr; }  /* visual-QA P2 (2026-10-03 r1): wider repo share so the approved placeholder (measured 288.4px text at 17px + 34px input chrome = 322px box; band form content = 592px because band-inner's container class carries 24px paddings inside its 640px max-width — 1.25fr/1.3fr left 0-3.6px slack and still ellipsized in renders) never truncates; repo box ≈336px (≈14px slack worst-case), email ≈240px */
+  .kpi-row { grid-template-columns: repeat(4, 1fr); }
+  /* visual-QA P1 (2026-10-03 r1): artifact centered while the hero is stacked (640–1199px). Scope-gated
+     to ≥640px deliberately: auto margins switch a grid item to fit-content sizing, whose min-content
+     floor (~502px) would overflow the <640px tracks — measured as a page-level horizontal overflow at
+     375px before this scoping. At ≥640px free space exists (artifact ≤520px cap applies). */
+  .artifact { margin-inline: auto; }
+}
+@media (min-width: 900px) {
+  body { font-size: 1.0625rem; }                      /* 17px desktop */
+  .hero { padding: 32px 0 112px; }
+  /* visual-QA P1 (2026-10-03 r1): two-column hero moved from 900px to 1200px — at the old 1.4fr:1fr
+     split the artifact panel inner (~376px) can never hold the 7-column table (compressed min-content
+     ≈446px measured), which is the clipping defect. Below 1200px the hero stacks and the centered
+     ≤520px panel gives the table ~478px inner — every column visible without scroll from ~540px up. */
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .section { padding: 96px 0; }
+  .band { padding: 112px 0; }                          /* the band keeps the most whitespace */
+}
+@media (min-width: 1024px) {
+  .benefit-grid { grid-template-columns: repeat(3, 1fr); }   /* 3×2 */
+}
+@media (min-width: 1200px) {
+  .tier-grid { grid-template-columns: repeat(4, 1fr); }      /* 4-across on wide desktop */
+  /* visual-QA P1 (2026-10-03 r1): rebalanced toward the artifact per QA instruction (sanctioned panel
+     470–520px): copy ≈487px / panel ≈513px at 1032px container (gap-aware math), panel inner ≈471px ≥
+     compressed table min-content ≈446px — all 7 columns render without scroll, copy column stays the wider one */
+  .hero-grid { grid-template-columns: 0.95fr 1fr; align-items: start; gap: 32px; }
+}
+
+/* ---------- reduced motion (page has no animation; guard is belt-and-braces) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
+}
