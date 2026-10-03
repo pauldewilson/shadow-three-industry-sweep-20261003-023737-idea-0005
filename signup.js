@@ -13,7 +13,10 @@
    frozen contract fields and reads the canonical config keys, matching the
    deployed SignupCreate schema (extra: "forbid"); 2026-10-03 r3 Enter-keydown
    revision — pressing Enter in a text-like field submits (QA finding F-1,
-   fixed with the proven-live DocuPlow keydown pattern)):
+   fixed with the proven-live DocuPlow keydown pattern); 2026-10-03 r4
+   captcha-readiness revision — the loader waits until
+   grecaptcha.enterprise.execute is actually callable (fixes the progressive
+   submodule race on first submit)):
    - binds to every <form data-signup> on the page;
    - canonical config keys: backendUrl, siteKey, source, consentVersion,
      captchaRequired (quoted-key one-liner per §12; optional messages seam
@@ -190,14 +193,25 @@
 
   /* §12 step 3 — reCAPTCHA Enterprise loader, injected ONLY when the config
      sets captchaRequired (the ONLY external request the contract allows, and
-     it never happens on inert/local pages). Injected at most once per page. */
+     it never happens on inert/local pages). Injected at most once per page.
+
+     Readiness is NOT "grecaptcha.enterprise exists": Google attaches
+     enterprise.execute later via a progressively loaded submodule, so a mere
+     existence check raced the first submit ("grecaptcha.enterprise.execute
+     is not a function", live 2026-10-03). Ready means execute is callable —
+     recaptchaToken's ready() callback then runs against a callable execute. */
+  function recaptchaExecuteReady() {
+    var g = window.grecaptcha && window.grecaptcha.enterprise;
+    return !!g && typeof g.execute === "function";
+  }
+
   function loadRecaptcha(done) {
-    if (window.grecaptcha && window.grecaptcha.enterprise) { done(null); return; }
+    if (recaptchaExecuteReady()) { done(null); return; }
     if (document.querySelector("script[data-recaptcha-loader]")) {
       var waited = 0;
       var timer = setInterval(function () {
         waited += 100;
-        if (window.grecaptcha && window.grecaptcha.enterprise) {
+        if (recaptchaExecuteReady()) {
           clearInterval(timer);
           done(null);
         } else if (waited > 5000) {
@@ -211,7 +225,22 @@
     script.src = "https://www.google.com/recaptcha/enterprise.js?render=" + encodeURIComponent(CONFIG.siteKey);
     script.async = true;
     script.setAttribute("data-recaptcha-loader", "");
-    script.onload = function () { done(null); };
+    script.onload = function () {
+      /* script.onload is NOT execute-ready: the progressive submodule can
+         still be attaching enterprise.execute — wait for it before done()
+         (150ms/40-tries poll, the codebase pattern). */
+      var tries = 0;
+      var timer = setInterval(function () {
+        tries += 1;
+        if (recaptchaExecuteReady()) {
+          clearInterval(timer);
+          done(null);
+        } else if (tries > 40) {
+          clearInterval(timer);
+          done(new Error("recaptcha-load-timeout"));
+        }
+      }, 150);
+    };
     script.onerror = function () { done(new Error("recaptcha-load-failed")); };
     document.head.appendChild(script);
   }
