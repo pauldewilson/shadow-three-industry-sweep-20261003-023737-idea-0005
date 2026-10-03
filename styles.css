@@ -176,6 +176,12 @@ code, .mono {
   border: 0; border-radius: var(--radius-control); padding: 12px 24px; cursor: pointer;
 }
 .band button:hover { background: var(--accent-soft); }
+/* Disabled-not-hidden success/in-flight state (2026-10-01 certified pattern,
+   ported 2026-10-03, signup.js r5): busy/locked controls keep their exact
+   boxes — the disabled attribute changes no geometry; only opacity signals
+   the state, so the layout never shifts. */
+.band button[disabled] { opacity: 0.65; cursor: default; }
+.band input[disabled] { opacity: 0.65; cursor: default; }
 .signup-status { margin: 0; font-size: 0.9375rem; font-weight: 600; color: var(--accent-soft); }
 .signup-status:not(:empty) { margin-top: 12px; }  /* zero-footprint when empty; spacing only when signup.js fills it (live variants) */
 .consent { font-size: 0.875rem; color: var(--accent-soft); max-width: 56ch; margin: 20px 0 0; }

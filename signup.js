@@ -16,7 +16,10 @@
    fixed with the proven-live DocuPlow keydown pattern); 2026-10-03 r4
    captcha-readiness revision — the loader waits until
    grecaptcha.enterprise.execute is actually callable (fixes the progressive
-   submodule race on first submit)):
+   submodule race on first submit); 2026-10-03 r5 success-lock revision —
+   in-flight aria-busy + disabled submit controls, HTTP 200 locks every
+   input and button (disabled attribute, never removed or hidden — no
+   layout shift), every failure path re-enables the controls for retry)):
    - binds to every <form data-signup> on the page;
    - canonical config keys: backendUrl, siteKey, source, consentVersion,
      captchaRequired (quoted-key one-liner per §12; optional messages seam
@@ -191,6 +194,39 @@
     if (stateClass) { status.classList.add(stateClass); }
   }
 
+  /* Success-lock + in-flight state (2026-10-01 certified pattern, ported
+     2026-10-03, signup.js r5). While a submission is in flight the form
+     carries aria-busy="true" and its submit buttons are disabled (a
+     disabled control natively stops dispatching clicks, so the bound
+     click/Enter paths go silent — the data-submitting attribute stays the
+     authoritative single-flight gate). On HTTP 200 the entire form is
+     locked: every input and button inside <form data-signup> gets the
+     disabled attribute. Controls are never removed or hidden: `disabled`
+     changes no box geometry, so the layout never shifts. On every failure
+     path the buttons re-enable for retry, aria-busy clears, and inputs are
+     never disabled. */
+  function lockFormFields(form) {
+    var controls = form.querySelectorAll("input, button");
+    for (var i = 0; i < controls.length; i++) { controls[i].disabled = true; }
+  }
+
+  function setFormBusy(form, busy, succeeded) {
+    var buttons = form.querySelectorAll("button, input[type=\"button\"], input[type=\"submit\"]");
+    var i;
+    if (busy) {
+      form.setAttribute("aria-busy", "true");
+      for (i = 0; i < buttons.length; i++) { buttons[i].disabled = true; }
+    } else {
+      form.removeAttribute("aria-busy");
+      if (succeeded) {
+        lockFormFields(form);
+      } else {
+        /* Failure keeps the form enabled for retry (honest error shown). */
+        for (i = 0; i < buttons.length; i++) { buttons[i].disabled = false; }
+      }
+    }
+  }
+
   /* §12 step 3 — reCAPTCHA Enterprise loader, injected ONLY when the config
      sets captchaRequired (the ONLY external request the contract allows, and
      it never happens on inert/local pages). Injected at most once per page.
@@ -283,6 +319,10 @@
   function submitSignup(form) {
     if (form.getAttribute("data-submitting") === "true") { return; }
     form.setAttribute("data-submitting", "true");
+    /* In-flight state (2026-10-01 certified pattern): aria-busy on the form
+       + submit buttons disabled (clicks on disabled controls stop
+       dispatching; data-submitting stays the single-flight gate). */
+    setFormBusy(form, true, false);
 
     var form_data = collectFormData(form);
     var email = extractEmail(form, form_data);
@@ -305,6 +345,10 @@
     setStatus(form, message("pending"), null);
 
     var postPayload = function (body) {
+      /* Settled true only on HTTP 200 (immediately with the success
+         message); it drives the settle step — lock on success, re-enable
+         the buttons on failure. */
+      var succeeded = false;
       fetch(CONFIG.backendUrl.replace(/\/+$/, "") + "/api/v1/signups", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -315,6 +359,7 @@
           var status = response.status;
           if (status === 200) {
             setStatus(form, message("success"), "signup-status--success");
+            succeeded = true;
           } else if (status === 422) {
             setStatus(form, describeUnprocessable(body2), "signup-status--error");
           } else if (status === 429) {
@@ -324,12 +369,17 @@
           } else {
             setStatus(form, message("server"), "signup-status--error");
           }
+          /* Settle (always reached on the POST path): HTTP 200 locks the
+             form — disabled, never hidden; any failure re-enables the
+             buttons for retry and clears aria-busy. */
+          setFormBusy(form, false, succeeded);
         });
       }).catch(function (error) {
         form.removeAttribute("data-submitting");
         /* fetch rejects with TypeError on network failure — its own wording;
            anything else unexpected falls to the server-class wording. */
         setStatus(form, message(error && error.name === "TypeError" ? "network" : "server"), "signup-status--error");
+        setFormBusy(form, false, false);
       });
     };
 
@@ -338,12 +388,14 @@
         if (loadError) {
           form.removeAttribute("data-submitting");
           setStatus(form, message("verification"), "signup-status--error");
+          setFormBusy(form, false, false);
           return;
         }
         recaptchaToken(function (tokenError, token) {
           if (tokenError || !token) {
             form.removeAttribute("data-submitting");
             setStatus(form, message("verification"), "signup-status--error");
+            setFormBusy(form, false, false);
             return;
           }
           payload.captcha_token = token;
