@@ -28,7 +28,7 @@
 
   <header class="site-header">
     <div class="container">
-      <p class="badge">Launching Q4 2026</p>  <!-- S0-01 -->
+      <p class="badge">Launching Q1 2027</p>  <!-- S0-01 -->
     </div>
   </header>
 
@@ -38,8 +38,8 @@
     <section class="section hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <h1 class="hero-title">Every AI change in your data stack, on the record.</h1>  <!-- S1-01 -->
-          <p class="hero-lede">AI-generated changes are merging into production pipelines faster than anyone can review them. MergeSight gives data leaders one standing view of what AI shipped, whether it was reviewed and tested, and how it correlates with data incidents.</p>  <!-- S1-02 -->
+          <h1 class="hero-title">AI-generated changes are merging into your production pipelines faster than anyone can review them.</h1>  <!-- S1-01 -->
+          <p class="hero-lede">MergeSight gives data leaders one standing view of what AI shipped, whether it was reviewed and tested, and how it correlates with data incidents.</p>  <!-- S1-02 -->
           <div class="definition-card">
             <p>MergeSight joins four things your data stack already produces — <strong>GitHub pull-request metadata</strong>, <strong>AI-authorship signals</strong>, <strong>dbt artifacts (<code>manifest.json</code>, <code>run_results.json</code>)</strong>, and your <strong>data-incident feed</strong> — into one read-only view. That's AI change assurance.</p>  <!-- S1-05 verbatim; strong/code = typographic emphasis only -->
           </div>
@@ -92,8 +92,8 @@
       <div class="container">
         <h2 class="section-title">AI code is merging with thin review — and nobody is counting</h2>  <!-- S2-01 -->
         <p class="prose stat-para">The numbers are public and blunt. <span class="src">Sonar</span>'s 2026 State of Code finds <span class="num">42%</span> of committed code is now AI-generated — and <span class="num">96%</span> of developers don't fully trust it. <span class="src">Faros</span> telemetry across thousands of teams shows a <span class="num">31.3%</span> rise in pull requests merging with zero review. And <span class="src">LinearB</span>'s benchmark of <span class="num">8.1 million</span> pull requests found AI-authored changes accepted at <span class="num">32.7%</span> versus <span class="num">84.4%</span> for human-authored ones — after waiting <span class="num">4.6×</span> longer for a reviewer to pick them up.</p>  <!-- S2-02 verbatim, ONE paragraph — never decomposed into stat cards (C4 guard) -->
-        <p class="prose">Most review processes were designed for human-written code — pull request by pull request, reviewer by reviewer. AI-authored volume broke that math: more changes, thinner review, and no way to see, across a quarter, how AI-authored changes differ from the rest of your merge history.</p>  <!-- S2-03 -->
-        <p class="prose">So when an incident hits, the engineering leader's real question — "which AI-authored changes shipped, and were they reviewed?" — gets answered by hand: ninety days of merge data pulled into a spreadsheet, after the fact, if it gets answered at all. That is the job MergeSight takes over.</p>  <!-- S2-04 -->
+        <p class="prose">Review processes were designed for human-written code, pull request by pull request. AI-authored volume broke that math — and left no way to see, across a quarter, how AI-authored changes differ from the rest of your merge history.</p>  <!-- S2-03 -->
+        <p class="prose">When an incident hits, the real question — "which AI-authored changes shipped, and were they reviewed?" — gets answered by hand: ninety days of merge data into a spreadsheet, after the fact, if it gets answered at all. That is the job MergeSight takes over.</p>  <!-- S2-04 -->
       </div>
     </section>
 
@@ -176,11 +176,11 @@
         <div class="faq-list prose">
           <div class="faq-item">
             <h3>What exactly is in the free monthly report?</h3>  <!-- S6-02 -->
-            <p>A complete AI change assurance report for one repository: every AI-authored and human-authored change that shipped, review coverage including merges with no review, test and documentation coverage on the dbt models those changes touched, the data incidents correlated with preceding changes, and attribution labels on every row. It's shareable — built to be forwarded to your VP or into your board deck, not buried in a dashboard.</p>  <!-- S6-03 -->
+            <p>Every AI-authored and human-authored change that shipped in one repository — review coverage including merges with no review, test and documentation coverage on the models they touched, correlated incidents, and attribution labels on every row. The whole report, not a teaser.</p>  <!-- S6-03 -->
           </div>
           <div class="faq-item">
             <h3>What does "attribution unverified" mean?</h3>  <!-- S6-04 -->
-            <p>AI authorship is detected from commit signals — co-authored-by trailers, tool telemetry where tools expose it. Detection is not proof: some AI code carries no marker, and markers can be edited. So wherever attribution is inferred rather than direct, every row is labeled "attribution unverified." That honesty is the point. Auditors and boards don't expect line-level certainty — they expect a factual, artifact-level record of what shipped and how it was reviewed.</p>  <!-- S6-05 -->
+            <p>AI authorship is detected from commit signals — co-authored-by trailers, tool telemetry where tools expose it. Detection isn't proof, so wherever attribution is inferred rather than direct, every row is labeled "attribution unverified." Boards don't expect line-level certainty — they expect a factual, artifact-level record.</p>  <!-- S6-05 -->
           </div>
           <div class="faq-item">
             <h3>Who is this for?</h3>  <!-- S6-06 -->
@@ -188,11 +188,11 @@
           </div>
           <div class="faq-item">
             <h3>What is MergeSight not?</h3>  <!-- S6-08 -->
-            <p>Not an audit. Not compliance certification. Not a legal attestation. MergeSight is decision support for engineering leadership — a factual, standing record of AI-authored change activity. It's also not an AI code reviewer (it doesn't comment on your pull requests) and not a data-observability platform (it doesn't watch your warehouse at runtime). It's the standing join between those worlds, at the manager's desk.</p>  <!-- S6-09 — AC-1 verbatim; styled identically to other answers, no warning chrome -->
+            <p>Not an audit. Not compliance certification. Not a legal attestation. MergeSight is decision support — a standing record of AI-authored change activity. It doesn't comment on pull requests and doesn't watch your warehouse at runtime; it's the standing join between those worlds, at the manager's desk.</p>  <!-- S6-09 — AC-1 verbatim; styled identically to other answers, no warning chrome -->
           </div>
           <div class="faq-item">
             <h3>How is this different from engineering-intelligence dashboards and AI code reviewers?</h3>  <!-- S6-10 -->
-            <p>Engineering-intelligence platforms are built and priced per developer seat for large engineering organizations — they measure delivery, not data. AI code reviewers work one pull request at a time. Data-observability tools watch incidents at runtime. None of them joins AI attribution, review coverage, dbt artifacts, and data-incident feeds into one standing view for a data team. That join is the product.</p>  <!-- S6-11 — single on-page market claim, keep verbatim/bounded -->
+            <p>Engineering-intelligence platforms are priced per developer seat for large organizations and measure delivery, not data. AI code reviewers work pull request by pull request. None of them joins AI attribution, review coverage, dbt artifacts, and data-incident feeds into one standing view for a data team.</p>  <!-- S6-11 — single on-page market claim, keep verbatim/bounded -->
           </div>
           <div class="faq-item">
             <h3>What does MergeSight connect to?</h3>  <!-- S6-12 -->
@@ -206,7 +206,7 @@
     <section id="signup" class="section band" tabindex="-1">
       <div class="container band-inner">
         <h2 class="band-title">Get your free single-repo report</h2>  <!-- S7-01 — largest section heading on the page -->
-        <p class="band-support">Launching Q4 2026 — leave your details for more info when we launch, and we'll follow up with everything you need to connect your first repository.</p>  <!-- S7-02 -->
+        <p class="band-support">Launching Q1 2027. Leave your work email and at launch we'll send your setup details — your free single-repo report follows once you connect a repository.</p>  <!-- S7-02 -->
         <form data-signup>
           <div class="form-row">
             <div class="field">
@@ -335,7 +335,7 @@
   <footer class="site-footer">
     <div class="container">
       <p>© MergeSight — AI change assurance for data teams.</p>  <!-- S8-01 -->
-      <p>Launching Q4 2026.</p>  <!-- S8-02 -->
+      <p>Launching Q1 2027.</p>  <!-- S8-02 -->
       <!-- Persistent post-decision privacy control: hidden until a choice exists
            and while the banner/manager surface is open (tracking.js toggles it);
            on the inert local page it never appears. -->
