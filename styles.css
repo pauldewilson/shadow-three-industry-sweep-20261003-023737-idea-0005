@@ -93,7 +93,7 @@ code, .mono {
 /* ---------- S1 hero ---------- */
 .hero { padding: 24px 0 96px; }
 .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
-.hero-title { font-size: clamp(2.1rem, 4.5vw + 1rem, 2.9rem); line-height: 1.15; margin: 20px 0 20px; }
+.hero-title { font-size: clamp(2.1rem, 4.5vw + 1rem, 2.9rem); line-height: 1.15; margin: 20px 0 20px; text-wrap: balance; }  /* r8 N-2 / visual-qa r9 same-touch rec: evens the H1 wrap and cures the lone-word mobile orphan ("them."); line count and fold geometry unchanged */
 .hero-lede { color: var(--text-2); max-width: 66ch; margin-bottom: 24px; }
 .definition-card {
   background: var(--surface);
@@ -157,8 +157,8 @@ code, .mono {
 /* ---------- S7 signup band — PRIMARY VISUAL FOCAL POINT ---------- */
 .band { background: var(--accent-strong); color: var(--on-accent); padding: 72px 0; }
 .band-inner { max-width: 640px; margin-inline: auto; }  /* centered 640px column per layout map §2.6 / §4.1 */
-.band-title { font-size: clamp(2rem, 3.2vw + 0.9rem, 2.5rem); font-weight: 700; color: var(--on-accent); text-align: center; margin-bottom: 12px; }
-.band-support { color: var(--accent-soft); text-align: center; margin-bottom: 32px; }
+.band-title { font-size: clamp(2rem, 3.2vw + 0.9rem, 2.5rem); font-weight: 700; color: var(--on-accent); text-align: center; margin-bottom: 12px; text-wrap: balance; }  /* visual-qa r9 (2026-10-12): balances the 38-char S7-01 headline into an even 2-line split at 1280 (was 4+1 with the lone-word "launches" orphan); progressive enhancement — unsupported browsers keep the current wrap */
+.band-support { color: var(--accent-soft); text-align: center; margin-bottom: 32px; text-wrap: balance; }  /* r8 N-2 / visual-qa r9 same-touch rec: keeps the band lead's rag even (r9's S7-02 already cleared the recorded "repository." orphan); progressive enhancement */
 .form-row { display: grid; gap: 16px; }
 .field label { display: block; font-weight: 600; font-size: 0.9375rem; margin-bottom: 8px; color: var(--on-accent); }
 .band input {
