@@ -94,6 +94,7 @@
         <p class="prose stat-para">The numbers are public and blunt. <span class="src">Sonar</span>'s 2026 State of Code finds <span class="num">42%</span> of committed code is now AI-generated — and <span class="num">96%</span> of developers don't fully trust it. <span class="src">Faros</span> telemetry across thousands of teams shows a <span class="num">31.3%</span> rise in pull requests merging with zero review. And <span class="src">LinearB</span>'s benchmark of <span class="num">8.1 million</span> pull requests found AI-authored changes accepted at <span class="num">32.7%</span> versus <span class="num">84.4%</span> for human-authored ones — after waiting <span class="num">4.6×</span> longer for a reviewer to pick them up.</p>  <!-- S2-02 verbatim, ONE paragraph — never decomposed into stat cards (C4 guard) -->
         <p class="prose">Review processes were designed for human-written code, pull request by pull request. AI-authored volume broke that math — and left no way to see, across a quarter, how AI-authored changes differ from the rest of your merge history.</p>  <!-- S2-03 -->
         <p class="prose">When an incident hits, the real question — "which AI-authored changes shipped, and were they reviewed?" — gets answered by hand: ninety days of merge data into a spreadsheet, after the fact, if it gets answered at all. That is the job MergeSight takes over.</p>  <!-- S2-04 -->
+        <p class="cta-anchor-row"><a class="cta cta-secondary" href="#signup">Get notified at launch</a></p>  <!-- r10 C3: S1-04 reuse, sanctioned (r10 scope item 3) -->
       </div>
     </section>
 
@@ -166,6 +167,7 @@
           </li>
         </ul>
         <p class="billing-note">Every plan is priced per data team, billed annually. The free single-repo report stays free.</p>  <!-- S5-11 -->
+        <p class="cta-anchor-row"><a class="cta cta-secondary" href="#signup">Get notified at launch</a></p>  <!-- r10 C3: S1-04 reuse, sanctioned (r10 scope item 3) -->
       </div>
     </section>
 
@@ -248,13 +250,11 @@
 <aside class="consent-banner" data-consent-banner aria-labelledby="consent-banner-title" hidden>
   <div class="consent-banner__inner">
     <h2 id="consent-banner-title" tabindex="-1">Allow visit analytics?</h2>
-    <p class="consent-banner__body">With your permission, we use a random browser ID for up to 30 days to connect visits and signups on this site. We record campaign tags, the pages you visit and basic browser/device details, and keep detailed records for up to 90 days. You can decline and still sign up, or change your choice anytime.</p>
 
     <div class="consent-banner__actions">
       <button type="button" class="consent-btn" data-consent-allow>Allow analytics</button>
       <button type="button" class="consent-btn" data-consent-decline>Decline analytics</button>
     </div>
-    <p class="consent-banner__note" data-consent-note>Until you answer, we count each visit anonymously — no cookies, no browser storage, no identifiers, nothing personal.</p>
 
     <!-- Manager mode only (reopened via footer "Privacy choices" after a
          choice exists); hidden in the initial decision state. -->
@@ -272,6 +272,8 @@
       <summary class="consent-details__summary"><span>Privacy details</span></summary>
       <div class="consent-details__body">
         <button type="button" class="consent-details__close" data-consent-details-close>Close</button>
+    <p class="consent-banner__body">With your permission, we use a random browser ID for up to 30 days to connect visits and signups on this site. We record campaign tags, the pages you visit and basic browser/device details, and keep detailed records for up to 90 days. You can decline and still sign up, or change your choice anytime.</p>
+    <p class="consent-banner__note" data-consent-note>Until you answer, we count each visit anonymously — no cookies, no browser storage, no identifiers, nothing personal.</p>
         <p class="consent-details__heading">Who is responsible</p>
         <p>This site is run by Canvas Tech Solutions, which is responsible for the data described here.</p>
 
@@ -348,6 +350,10 @@
       <p class="sr-only" role="status" data-consent-status></p>
     </div>
   </footer>
+
+  <div class="sticky-cta">
+    <a class="cta" href="#signup">Get notified at launch</a>  <!-- r10 C2: S1-04 reuse, sanctioned (r10 scope item 2) -->
+  </div>
 
   <script src="signup-config.js"></script>  <!-- comment-only stub; keeps window.__SHADOW_SIGNUP_CONFIG__ undefined locally -->
   <script src="signup.js"></script>         <!-- dormant; bound to <form data-signup>, no-ops while config undefined -->
